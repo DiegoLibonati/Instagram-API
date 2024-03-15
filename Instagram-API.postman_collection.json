@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "a0f1ef90-2033-461f-85a0-3b795f6f6aa0",
+		"name": "Instagram-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27611586"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Get User ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "IGQWRPejZANQTZAQTGhYeVl5OHZAwNG5kY0g2TjVTUUhsbHJ2aVQyZAEJlaWZAoOE5aWHE1U2RYb3dlWGF2RVpXVU5Wckp2MnE0bzFEZAjVCSjhQOTVveG9FTUxoNERPbzE0TXJoYW9TQlduV05YZAnVHZATNSZADdZAU1BlT1EZD",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{APP_URL}}/auth/user_id",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"auth",
+								"user_id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Instagram",
+			"item": [
+				{
+					"name": "Alive",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "IGQWRPejZANQTZAQTGhYeVl5OHZAwNG5kY0g2TjVTUUhsbHJ2aVQyZAEJlaWZAoOE5aWHE1U2RYb3dlWGF2RVpXVU5Wckp2MnE0bzFEZAjVCSjhQOTVveG9FTUxoNERPbzE0TXJoYW9TQlduV05YZAnVHZATNSZADdZAU1BlT1EZD",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APP_URL}}/instagram/alive",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"instagram",
+								"alive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "IGQWRPejZANQTZAQTGhYeVl5OHZAwNG5kY0g2TjVTUUhsbHJ2aVQyZAEJlaWZAoOE5aWHE1U2RYb3dlWGF2RVpXVU5Wckp2MnE0bzFEZAjVCSjhQOTVveG9FTUxoNERPbzE0TXJoYW9TQlduV05YZAnVHZATNSZADdZAU1BlT1EZD",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{APP_URL}}/instagram/user/profile",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"instagram",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Stories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/instagram/user/stories",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"instagram",
+								"user",
+								"stories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APP_URL",
+			"value": "http://localhost:5000/api/v1",
+			"type": "string"
+		}
+	]
+}
