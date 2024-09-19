@@ -28,7 +28,7 @@ This API is developed with the intention of being able to access the instagram A
 
 ## Portfolio link
 
-[https://diegolibonati.com.ar/#/apis/Instagram-API](https://diegolibonati.com.ar/#/apis/Instagram-API)
+[https://diegolibonati.com.ar/#/project/Instagram-API](https://diegolibonati.com.ar/#/project/Instagram-API)
 
 ## Env Keys
 
