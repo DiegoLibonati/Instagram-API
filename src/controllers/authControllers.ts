@@ -1,13 +1,17 @@
-import { redisClient } from "../app";
+import { RedisClientType } from "redis";
+import { Request, Response } from "express";
+
+import app from "../app";
 import configs from "../config";
-import {
-  AuthController as AuthControllerT,
-  User as UserT,
-} from "../entities/entities";
-import { User } from "../models/User";
+
+export type AuthControllerT = {
+  getUserId: (req: Request, res: Response) => Promise<Response>;
+};
 
 export const AuthController: AuthControllerT = {
   getUserId: async (_, res) => {
+    const redisClient: RedisClientType = app.get("redisClient");
+
     await redisClient.connect();
 
     const INSTAGRAM_ACCESS_TOKEN = await redisClient.get("access_token");
@@ -17,11 +21,11 @@ export const AuthController: AuthControllerT = {
         `${configs.INSTAGRAM_API}/me?access_token=${INSTAGRAM_ACCESS_TOKEN}`
       );
 
-      const user: Pick<UserT, "id"> = await request.json();
+      const user: { id: string } = await request.json();
 
-      const userModel = new User(user.id, "", "", 0);
+      const idUser = user.id;
 
-      await redisClient.set("user", JSON.stringify(userModel.createUser()));
+      await redisClient.set("idUser", idUser);
 
       await redisClient.disconnect();
 

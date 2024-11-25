@@ -1,14 +1,24 @@
-import { redisClient } from "../app";
-import { VerifyIdUser } from "../entities/entities";
+import { NextFunction, Request, Response } from "express";
+import { RedisClientType } from "redis";
+
+import app from "../app";
+
+export type VerifyIdUser = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => void;
 
 export const verifyIdUser: VerifyIdUser = async (req, res, next) => {
   console.log("Init ID USER Middleware");
 
+  const redisClient: RedisClientType = app.get("redisClient");
+
   await redisClient.connect();
 
-  const REDIS_INSTAGRAM_USER = await redisClient.get("user");
+  const REDIS_INSTAGRAM_USER_ID = await redisClient.get("idUser");
 
-  if (!REDIS_INSTAGRAM_USER) {
+  if (!REDIS_INSTAGRAM_USER_ID) {
     await redisClient.disconnect();
     return res
       .status(401)

@@ -1,4 +1,5 @@
 import * as dotenv from "dotenv";
+
 import { Configs } from "./entities/entities";
 
 dotenv.config();

@@ -1,9 +1,14 @@
-import { redisClient } from "../app";
+import { Request, Response } from "express";
+import { RedisClientType } from "redis";
+
+import app from "../app";
 import configs from "../config";
-import {
-  InstagramController as InstagramControllerT,
-  User,
-} from "../entities/entities";
+import { User } from "../models/User";
+
+export type InstagramControllerT = {
+  alive: (req: Request, res: Response) => Response;
+  userProfile: (req: Request, res: Response) => Promise<Response>;
+};
 
 export const InstagramController: InstagramControllerT = {
   alive: (_, res) => {
@@ -22,18 +27,19 @@ export const InstagramController: InstagramControllerT = {
     }
   },
   userProfile: async (_, res) => {
+    const redisClient: RedisClientType = app.get("redisClient");
+    await redisClient.connect();
+
+    const REDIS_INSTAGRAM_USER_ID: string = JSON.parse(
+      (await redisClient.get("idUser")) as string
+    );
+    const INSTAGRAM_ACCESS_TOKEN = (await redisClient.get(
+      "access_token"
+    )) as string;
+
     try {
-      await redisClient.connect();
-
-      const REDIS_INSTAGRAM_USER: User = JSON.parse(
-        (await redisClient.get("user")) as string
-      );
-      const INSTAGRAM_ACCESS_TOKEN = await redisClient.get("access_token");
-
-      const idUser = REDIS_INSTAGRAM_USER.id;
-
       const request = await fetch(
-        `${configs.INSTAGRAM_API}/${configs.INSTAGRAM_API_VERSION}/${idUser}?fields=id,username,account_type,media_count&access_token=${INSTAGRAM_ACCESS_TOKEN}`
+        `${configs.INSTAGRAM_API}/${configs.INSTAGRAM_API_VERSION}/${REDIS_INSTAGRAM_USER_ID}?fields=id,username,account_type,media_count&access_token=${INSTAGRAM_ACCESS_TOKEN}`
       );
 
       const profile: Pick<
@@ -41,11 +47,14 @@ export const InstagramController: InstagramControllerT = {
         "id" | "username" | "account_type" | "media_count"
       > = await request.json();
 
-      REDIS_INSTAGRAM_USER.username = profile.username;
-      REDIS_INSTAGRAM_USER.account_type = profile.account_type;
-      REDIS_INSTAGRAM_USER.media_count = profile.media_count;
+      const user = new User(
+        profile.id,
+        profile.username,
+        profile.account_type,
+        profile.media_count
+      );
 
-      await redisClient.set("user", JSON.stringify(REDIS_INSTAGRAM_USER));
+      await redisClient.set("user", user.userStringify());
 
       await redisClient.disconnect();
 

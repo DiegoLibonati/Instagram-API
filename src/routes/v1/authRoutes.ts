@@ -1,4 +1,5 @@
 import Router from "express";
+
 import { AuthController } from "../../controllers/authControllers";
 import { verifyAccessToken } from "../../middlewares/verifyAccessToken";
 

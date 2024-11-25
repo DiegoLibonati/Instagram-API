@@ -1,4 +1,5 @@
 import Router from "express";
+
 import { InstagramController } from "../../controllers/instagramControllers";
 import { verifyIdUser } from "../../middlewares/verifyIdUser";
 import { verifyAccessToken } from "../../middlewares/verifyAccessToken";
@@ -12,6 +13,6 @@ instagramRouter
     verifyAccessToken,
     verifyIdUser,
     InstagramController.userProfile
-  )
+  );
 
 export default instagramRouter;
