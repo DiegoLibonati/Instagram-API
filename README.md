@@ -52,7 +52,7 @@ This API is developed with the intention of being able to access the instagram A
 
 ## Testing
 
-1. Join to clone folder
+1. Join to the correct path of the clone
 2. Execute: `yarn test` or `npm test`
 
 ## Env Keys
