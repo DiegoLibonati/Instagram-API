@@ -97,25 +97,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Get User Stories",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{APP_URL}}/instagram/user/stories",
-							"host": [
-								"{{APP_URL}}"
-							],
-							"path": [
-								"instagram",
-								"user",
-								"stories"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		}
