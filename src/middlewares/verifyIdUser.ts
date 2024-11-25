@@ -9,7 +9,7 @@ export type VerifyIdUser = (
   next: NextFunction
 ) => void;
 
-export const verifyIdUser: VerifyIdUser = async (req, res, next) => {
+export const verifyIdUser: VerifyIdUser = async (_, res, next) => {
   console.log("Init ID USER Middleware");
 
   const redisClient: RedisClientType = app.get("redisClient");
@@ -24,7 +24,7 @@ export const verifyIdUser: VerifyIdUser = async (req, res, next) => {
       .status(401)
       .json({
         message:
-          "Para ejecutar este endpoint necesitas un ID USER para eso ejecuta v1/auth/user_id",
+          "To run this endpoint you need a USER ID for that run v1/auth/user_id.",
       })
       .end();
   }

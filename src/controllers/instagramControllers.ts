@@ -60,7 +60,7 @@ export const InstagramController: InstagramControllerT = {
 
       return res
         .status(200)
-        .json({ message: "Successfully found profile user", data: profile });
+        .json({ message: "Successfully found profile user.", data: profile });
     } catch (e: unknown) {
       await redisClient.disconnect();
       if (typeof e === "string") {

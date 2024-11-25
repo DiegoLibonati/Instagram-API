@@ -9,14 +9,14 @@ const loadRedis = () => {
   });
 
   redisClient.on("error", function (error) {
-    console.error("Error de conexión a Redis:", error);
+    console.error("Redis connection error:", error);
   });
 
   app.set("redisClient", redisClient);
 };
 
 const onInit = () => {
-  console.log(`Server running on ${configs.PORT}`);
+  console.log(`Server running on ${configs.PORT}.`);
 
   // Load Redis
   loadRedis();

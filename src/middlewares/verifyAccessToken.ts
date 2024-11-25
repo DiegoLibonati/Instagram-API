@@ -18,7 +18,7 @@ export const verifyAccessToken: VerifyAccessToken = async (_, res, next) => {
   if (!INSTAGRAM_USER_ACCESS_TOKEN)
     return res
       .status(401)
-      .json({ message: "Genera tu propio access token" })
+      .json({ message: "Generate your own access token." })
       .end();
 
   const redisClient: RedisClientType = app.get("redisClient");

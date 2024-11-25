@@ -31,7 +31,7 @@ export const AuthController: AuthControllerT = {
 
       return res
         .status(200)
-        .json({ message: "Successfully found the user id", data: user });
+        .json({ message: "Successfully found the user id.", data: user });
     } catch (e: unknown) {
       await redisClient.disconnect();
       if (typeof e === "string") {

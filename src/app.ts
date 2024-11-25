@@ -15,7 +15,7 @@ app.use("/api/v1/instagram", instagramRouter);
 
 app.use((_, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.status(404).json({ message: "Route not found" });
+  res.status(404).json({ message: "Route not found." });
 });
 
 export default app;
