@@ -50,6 +50,11 @@ This API is developed with the intention of being able to access the instagram A
 
 [https://diegolibonati.com.ar/#/project/Instagram-API](https://diegolibonati.com.ar/#/project/Instagram-API)
 
+## Testing
+
+1. Join to clone folder
+2. Execute: `yarn test` or `npm test`
+
 ## Env Keys
 
 The `PORT` key refers to the port to be used by the backend, by default it uses `5000`.
