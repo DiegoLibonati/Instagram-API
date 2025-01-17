@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon -L ./src/index.ts",
-    "test": "npx jest --watchAll --verbose"
+    "test": "jest --watchAll --verbose"
   },
   "dependencies": {
     "@types/express": "^4.17.21",
