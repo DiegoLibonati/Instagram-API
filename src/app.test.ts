@@ -1,4 +1,3 @@
-import { execSync } from "child_process";
 import * as redis from "redis";
 
 import request from "supertest";
@@ -13,10 +12,6 @@ describe("app.ts", () => {
   beforeAll(() => {
     console.log("Starting Redis container...");
     try {
-      // Levanta el contenedor Redis si no está corriendo
-      execSync("docker-compose up -d redis", { stdio: "inherit" });
-      console.log("Redis container is running!");
-
       console.log("Setting up Redis client...");
       const redisClient = redis.createClient({
         url: `redis://${configs.REDIS_HOST}:${configs.REDIS_PORT}`,
@@ -26,19 +21,6 @@ describe("app.ts", () => {
     } catch (error) {
       console.error("Error starting Redis container:", error);
       throw error;
-    }
-  });
-
-  afterAll(async () => {
-    try {
-      console.log("Stopping Redis container...");
-
-      // Detiene el contenedor Redis
-      execSync("docker-compose down", { stdio: "inherit" });
-      console.log("Redis container stopped!");
-    } catch (e) {
-      console.error("Error stopping Redis container:", e);
-      return e;
     }
   });
 
