@@ -5,8 +5,8 @@ import request from "supertest";
 import app from "./app";
 import configs from "./config";
 
-import { createServer } from "./tests/msw/server";
-import { mockMe, mockProfile } from "./tests/jest.constants";
+import { createServer } from "../tests/msw/server";
+import { mockMe, mockProfile } from "../tests/jest.constants";
 
 describe("app.ts", () => {
   beforeAll(() => {

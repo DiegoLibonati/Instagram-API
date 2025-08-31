@@ -4,10 +4,10 @@
 
 1. Clone the repository with `git clone "repository link"`
 2. Execute: `npm install` or `yarn install` in the terminal
-3. Execute: `docker-compose build --no-cache` in the terminal
-4. Once built, you must execute the command: `docker-compose up --force-recreate` in the terminal
+3. Execute: `docker-compose -f dev.docker-compose.yml build --no-cache` in the terminal
+4. Once built, you must execute the command: `docker-compose -f dev.docker-compose.yml up --force-recreate` in the terminal
 
-NOTE: You have to be standing in the folder containing the: `docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
+NOTE: You have to be standing in the folder containing the: `dev.docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
 
 ## Description
 
@@ -25,10 +25,6 @@ This API is developed with the intention of being able to access the instagram A
 #### Dependencies
 
 ```
-"@types/express": "^4.17.21"
-"@types/jest": "^29.5.14"
-"@types/node": "^20.10.5"
-"@types/supertest": "^6.0.2"
 "dotenv": "^16.3.1"
 "express": "^4.18.2"
 "redis": "^4.6.13"
@@ -37,6 +33,10 @@ This API is developed with the intention of being able to access the instagram A
 #### devDependencies
 
 ```
+"@types/express": "^4.17.21"
+"@types/jest": "^29.5.14"
+"@types/node": "^20.10.5"
+"@types/supertest": "^6.0.2"
 "jest": "^29.7.0"
 "nodemon": "^3.0.2"
 "supertest": "^7.0.0"
