@@ -1,7 +1,7 @@
 import express from "express";
 
-import authRouter from "./routes/v1/authRoutes";
-import instagramRouter from "./routes/v1/instagramRoutes";
+import authRouter from "@src/routes/v1/authRoutes";
+import instagramRouter from "@src/routes/v1/instagramRoutes";
 
 const app = express();
 

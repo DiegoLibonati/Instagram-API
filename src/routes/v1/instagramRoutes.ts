@@ -1,8 +1,8 @@
 import Router from "express";
 
-import { InstagramController } from "../../controllers/instagramControllers";
-import { verifyIdUser } from "../../middlewares/verifyIdUser";
-import { verifyAccessToken } from "../../middlewares/verifyAccessToken";
+import { InstagramController } from "@src/controllers/instagramControllers";
+import { verifyIdUser } from "@src/middlewares/verifyIdUser";
+import { verifyAccessToken } from "@src/middlewares/verifyAccessToken";
 
 const instagramRouter = Router();
 

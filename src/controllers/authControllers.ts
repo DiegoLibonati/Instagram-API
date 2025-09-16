@@ -1,8 +1,8 @@
 import { RedisClientType } from "redis";
 import { Request, Response } from "express";
 
-import app from "../app";
-import configs from "../config";
+import app from "@src/app";
+import configs from "@src/config";
 
 export type AuthControllerT = {
   getUserId: (req: Request, res: Response) => Promise<Response>;

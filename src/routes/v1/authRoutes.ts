@@ -1,7 +1,7 @@
 import Router from "express";
 
-import { AuthController } from "../../controllers/authControllers";
-import { verifyAccessToken } from "../../middlewares/verifyAccessToken";
+import { AuthController } from "@src/controllers/authControllers";
+import { verifyAccessToken } from "@src/middlewares/verifyAccessToken";
 
 const authRouter = Router();
 

@@ -1,7 +1,7 @@
 import * as redis from "redis";
 
-import app from "./app";
-import configs from "./config";
+import app from "@src/app";
+import configs from "@src/config";
 
 const loadRedis = () => {
   const redisClient = redis.createClient({

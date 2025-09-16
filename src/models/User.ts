@@ -1,4 +1,4 @@
-import { User as UserT } from "../entities/entities";
+import { User as UserT } from "@src/entities/entities";
 
 export class User {
   constructor(

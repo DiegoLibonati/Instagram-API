@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { RedisClientType } from "redis";
 
-import app from "../app";
-import configs from "../config";
+import app from "@src/app";
+import configs from "@src/config";
 
 export type VerifyAccessToken = (
   req: Request,

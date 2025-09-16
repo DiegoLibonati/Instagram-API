@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { RedisClientType } from "redis";
 
-import app from "../app";
+import app from "@src/app";
 
 export type VerifyIdUser = (
   req: Request,

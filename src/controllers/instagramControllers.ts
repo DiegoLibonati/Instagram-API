@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { RedisClientType } from "redis";
 
-import app from "../app";
-import configs from "../config";
-import { User } from "../models/User";
+import app from "@src/app";
+import configs from "@src/config";
+import { User } from "@src/models/User";
 
 export type InstagramControllerT = {
   alive: (req: Request, res: Response) => Response;

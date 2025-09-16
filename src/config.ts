@@ -1,8 +1,4 @@
-import * as dotenv from "dotenv";
-
-import { Configs } from "./entities/entities";
-
-dotenv.config();
+import { Configs } from "@src/entities/entities";
 
 const configs: Configs = {
   PORT: Number(process.env.PORT) || 5000,

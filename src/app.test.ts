@@ -2,11 +2,11 @@ import * as redis from "redis";
 
 import request from "supertest";
 
-import app from "./app";
-import configs from "./config";
+import app from "@src/app";
+import configs from "@src/config";
 
-import { createServer } from "../tests/msw/server";
-import { mockMe, mockProfile } from "../tests/jest.constants";
+import { createServer } from "@tests/msw/server";
+import { mockMe, mockProfile } from "@tests/jest.constants";
 
 describe("app.ts", () => {
   beforeAll(() => {
@@ -31,25 +31,12 @@ describe("app.ts", () => {
       {
         path: "https://graph.instagram.com/me",
         method: "get",
-        res: ({ request }) => {
-          const url = new URL(request.url);
-          const accessToken = url.searchParams.get("access_token");
-
-          console.log(accessToken);
-          return mockMe;
-        },
+        res: () => mockMe,
       },
       {
         path: `https://graph.instagram.com/v19.0/${mockMe.id}`,
         method: "get",
-        res: ({ request }) => {
-          const url = new URL(request.url);
-          const fields = url.searchParams.get("fields");
-          const accessToken = url.searchParams.get("access_token");
-
-          console.log(fields, accessToken);
-          return mockProfile;
-        },
+        res: () => mockProfile,
       },
     ]);
 
@@ -87,25 +74,12 @@ describe("app.ts", () => {
       {
         path: "https://graph.instagram.com/me",
         method: "get",
-        res: ({ request }) => {
-          const url = new URL(request.url);
-          const accessToken = url.searchParams.get("access_token");
-
-          console.log(accessToken);
-          return mockMe;
-        },
+        res: () => mockMe,
       },
       {
         path: `https://graph.instagram.com/v19.0/${mockMe.id}`,
         method: "get",
-        res: ({ request }) => {
-          const url = new URL(request.url);
-          const fields = url.searchParams.get("fields");
-          const accessToken = url.searchParams.get("access_token");
-
-          console.log(fields, accessToken);
-          return mockProfile;
-        },
+        res: () => mockProfile,
       },
     ]);
 

@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "@src/models/User";
 
 const USER = {
   id: "1234",

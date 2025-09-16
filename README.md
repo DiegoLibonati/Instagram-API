@@ -1,5 +1,11 @@
 # Instagram API
 
+## Educational Purpose
+
+This project was created primarily for **educational and learning purposes**.  
+While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
+The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
+
 ## Getting Started
 
 1. Clone the repository with `git clone "repository link"`
@@ -25,7 +31,6 @@ This API is developed with the intention of being able to access the instagram A
 #### Dependencies
 
 ```
-"dotenv": "^16.3.1"
 "express": "^4.18.2"
 "redis": "^4.6.13"
 ```
@@ -42,6 +47,8 @@ This API is developed with the intention of being able to access the instagram A
 "supertest": "^7.0.0"
 "ts-jest": "^29.2.5"
 "ts-node": "^10.9.2"
+"tsc-alias": "^1.8.16"
+"tsconfig-paths": "^4.2.0"
 "typescript": "^5.3.3"
 "msw": "^2.6.0"
 ```
@@ -124,3 +131,5 @@ That is to say, first we will execute the endpoint: `/v1/auth/user_id` this `idU
 - **Endpoint Name**: Get User Profile
 - **Endpoint Route**: /v1/instagram/user/profile
 - **Endpoint Fn**: This endpoint returns information about the profile based on the `idUser` previously generated. It will return the following fields: id, username, account_type, media_count
+
+## Known Issues
