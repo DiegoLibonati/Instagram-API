@@ -76,7 +76,19 @@ The `API_VERSION` key refers to the current API version. In case of modification
 API_VERSION="0.0.1"
 ```
 
-The `INSTAGRAM_API` key refers to the `BASE URL` used by instagram to access the `Instagram Graph` endpoints. 
+The `NODE_ENV` is the key to distinguish the environment in which the app is running.
+
+```
+NODE_ENV="development" || "production"
+```
+
+The `BASE_URL` key refers to the URL where the app is hosted.
+
+```
+BASE_URL="https://ig.libonatis.com.ar"
+```
+
+The `INSTAGRAM_API` key refers to the `BASE URL` used by instagram to access the `Instagram Graph` endpoints.
 
 The `INSTAGRAM_API_VERSION` key refers to which version of the instagram API we are going to consume.
 
@@ -126,7 +138,7 @@ That is to say, first we will execute the endpoint: `/v1/auth/user_id` this `idU
 - **Endpoint Route**: /v1/instagram/alive
 - **Endpoint Fn**: This endpoint returns the current version of my API, along with additional information such as the author.
 
------
+---
 
 - **Endpoint Name**: Get User Profile
 - **Endpoint Route**: /v1/instagram/user/profile

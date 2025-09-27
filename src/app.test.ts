@@ -1,26 +1,31 @@
-import * as redis from "redis";
-
 import request from "supertest";
 
 import app from "@src/app";
-import configs from "@src/config";
+
+import { envs } from "@src/config/env.config";
+import redisClient from "@src/config/redis.config";
+
+import { SessionService } from "@src/services/session.service";
+
+import {
+  MESSAGES_NOT,
+  MESSAGES_SUCCESS,
+} from "@src/constants/messages.constant";
+import { CODES_NOT, CODES_SUCCESS } from "@src/constants/codes.constant";
 
 import { createServer } from "@tests/msw/server";
 import { mockMe, mockProfile } from "@tests/jest.constants";
 
 describe("app.ts", () => {
-  beforeAll(() => {
-    console.log("Starting Redis container...");
-    try {
-      console.log("Setting up Redis client...");
-      const redisClient = redis.createClient({
-        url: `redis://${configs.REDIS_HOST}:${configs.REDIS_PORT}`,
-      });
+  beforeAll(async () => {
+    if (!redisClient.isOpen) {
+      await redisClient.connect();
+    }
+  });
 
-      app.set("redisClient", redisClient);
-    } catch (error) {
-      console.error("Error starting Redis container:", error);
-      throw error;
+  afterAll(async () => {
+    if (redisClient.isOpen) {
+      await redisClient.disconnect();
     }
   });
 
@@ -41,17 +46,19 @@ describe("app.ts", () => {
     ]);
 
     test("It should return an error message in case it does not have an access token.", async () => {
-      const accessToken = configs.INSTAGRAM_USER_ACCESS_TOKEN;
-      configs.INSTAGRAM_USER_ACCESS_TOKEN = "";
+      const accessToken = envs.INSTAGRAM_USER_ACCESS_TOKEN;
+
+      envs.INSTAGRAM_USER_ACCESS_TOKEN = "";
 
       const response = await request(app).get(`${PREFIX_AUTH}/user_id`);
 
       expect(response.status).toBe(401);
       expect(response.body).toEqual({
-        message: "Generate your own access token.",
+        code: CODES_NOT.foundAccessToken,
+        message: MESSAGES_NOT.foundAccessToken,
       });
 
-      configs.INSTAGRAM_USER_ACCESS_TOKEN = accessToken;
+      envs.INSTAGRAM_USER_ACCESS_TOKEN = accessToken;
     });
 
     describe(`${PREFIX_AUTH}/user_id`, () => {
@@ -60,7 +67,8 @@ describe("app.ts", () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
-          message: "Successfully found the user id.",
+          code: CODES_SUCCESS.getUserId,
+          message: MESSAGES_SUCCESS.getUserId,
           data: { id: mockMe.id },
         });
       });
@@ -84,38 +92,35 @@ describe("app.ts", () => {
     ]);
 
     test("It should return an error message in case it does not have an access token.", async () => {
-      const accessToken = configs.INSTAGRAM_USER_ACCESS_TOKEN;
-      configs.INSTAGRAM_USER_ACCESS_TOKEN = "";
+      const accessToken = envs.INSTAGRAM_USER_ACCESS_TOKEN;
+
+      envs.INSTAGRAM_USER_ACCESS_TOKEN = "";
 
       const response = await request(app).get(`${PREFIX_INSTAGRAM}/alive`);
 
       expect(response.status).toBe(401);
       expect(response.body).toEqual({
-        message: "Generate your own access token.",
+        code: CODES_NOT.foundAccessToken,
+        message: MESSAGES_NOT.foundAccessToken,
       });
 
-      configs.INSTAGRAM_USER_ACCESS_TOKEN = accessToken;
+      envs.INSTAGRAM_USER_ACCESS_TOKEN = accessToken;
     });
 
     test("It should return an error message in case it does not have an user id.", async () => {
-      const redisClient = redis.createClient({
-        url: `redis://${configs.REDIS_HOST}:${configs.REDIS_PORT}`,
-      });
-      await redisClient.connect();
-      const idUser = await redisClient.get("idUser");
+      const idUser = await SessionService.getUserId();
 
-      await redisClient.del(["idUser"]);
+      await SessionService.deleteUserId();
 
       const response = await request(app).get(`${PREFIX_INSTAGRAM}/alive`);
 
       expect(response.status).toBe(401);
       expect(response.body).toEqual({
-        message:
-          "To run this endpoint you need a USER ID for that run v1/auth/user_id.",
+        code: CODES_NOT.foundUserId,
+        message: MESSAGES_NOT.foundUserId,
       });
 
-      await redisClient.set("idUser", idUser!);
-      await redisClient.disconnect();
+      await SessionService.setUserId(idUser!);
     });
 
     describe(`${PREFIX_INSTAGRAM}/alive`, () => {
@@ -125,7 +130,7 @@ describe("app.ts", () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
           author: "Diego Libonati",
-          version: configs.API_VERSION,
+          version: envs.API_VERSION,
         });
       });
     });
@@ -138,7 +143,8 @@ describe("app.ts", () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
-          message: "Successfully found profile user.",
+          code: CODES_SUCCESS.getUserProfile,
+          message: MESSAGES_SUCCESS.getUserProfile,
           data: mockProfile,
         });
       });

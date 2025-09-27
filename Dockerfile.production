@@ -25,5 +25,5 @@ EXPOSE 3000
 
 USER appuser
 
-CMD ["node", "dist/src/index.js"]
+CMD ["node", "dist/src/server.js"]
 

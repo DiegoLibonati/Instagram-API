@@ -1,5 +1,7 @@
-.env
 node_modules
 volumes
-package-lock.json
 dist
+
+package-lock.json
+yarn.lock
+.env
