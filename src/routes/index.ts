@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import authRoutes from "@src/routes/v1/auth.routes";
-import instagramRoutes from "@src/routes/v1/instagram.routes";
+import authRoutes from "@src/routes/v1/auth.route";
+import instagramRoutes from "@src/routes/v1/instagram.route";
 
 const router = Router();
 
