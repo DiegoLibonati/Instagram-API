@@ -129,19 +129,25 @@ That is to say, first we will execute the endpoint: `/v1/auth/user_id` this `idU
 ### Auth Route
 
 - **Endpoint Name**: Get User ID
+- **Endpoint Method**: GET
 - **Endpoint Route**: /v1/auth/user_id
 - **Endpoint Fn**: This endpoint returns the `idUser` in order to consume the `Instagram Graph API` endpoints. This endpoint will return the `idUser` of the access token generated in our APP.
+- **Endpoint Params**: None
 
 ### Instagram Route
 
 - **Endpoint Name**: Alive
+- **Endpoint Method**: GET
 - **Endpoint Route**: /v1/instagram/alive
 - **Endpoint Fn**: This endpoint returns the current version of my API, along with additional information such as the author.
+- **Endpoint Params**: None
 
 ---
 
 - **Endpoint Name**: Get User Profile
+- **Endpoint Method**: GET
 - **Endpoint Route**: /v1/instagram/user/profile
 - **Endpoint Fn**: This endpoint returns information about the profile based on the `idUser` previously generated. It will return the following fields: id, username, account_type, media_count
+- **Endpoint Params**: None
 
 ## Known Issues
